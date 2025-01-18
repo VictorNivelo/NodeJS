@@ -1,19 +1,18 @@
+import indiceRutas from './rutas/rutas.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import express from 'express';
 
 const app = express()
-const __dirname = dirname(fileURLToPath(import.meta.url))
 // console.log(__dirname)
 
+// direccion de las vistas
+const __dirname = dirname(fileURLToPath(import.meta.url))
 app.set("views", join(__dirname, "vistas"))
 app.set("view engine", "ejs")
+app.use(indiceRutas)
 
-app.get('/', (req, res) => res.render('index'))
-app.get('/acerca', (req, res) => res.render('acerca'))
-app.get('/contacto', (req, res) => res.render('contacto'))
+app.use(express.static(join(__dirname, "static")))
 
 app.listen(3000)
 console.log("Servidor en puerto", 3000)
-
-// console.log("Hola mundo")

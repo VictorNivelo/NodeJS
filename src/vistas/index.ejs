@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenida</title>
+    <title><%= titulo %></title>
+    <%- include("componentes/head")%>
 </head>
 
 <body>
+    <%- include("componentes/navegacion")%>
+
     <h1>Hola mundo ejs</h1>
     <button>HOLA</button>
 </body>
