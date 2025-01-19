@@ -4,15 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= titulo %></title>
+    <title>
+        <%= titulo %>
+    </title>
     <%- include("componentes/head")%>
 </head>
 
 <body>
-    <%- include("componentes/navegacion")%>
+        <%- include("componentes/navegacion")%>
 
-    <h1>Hola mundo ejs</h1>
-    <button>HOLA</button>
+        <header class="container vh-100 d-flex justify-content-center align-items-center">
+            <img src="/img/vn_claro.png" alt="" class="w-25">
+            <h1 class="display-1 my-5 text-uppercase fw-bold">Victor Nivelo</h1>
+        </header>
+
+        <h1>Hola mundo ejs</h1>
+        <button>HOLA</button>
 </body>
 
 </html>
