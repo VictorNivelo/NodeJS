@@ -1,15 +1,16 @@
-import Usuario from '../modelo/usuario.js';
+import Persona from '../modelo/persona.js';
 import Cuenta from '../modelo/cuenta.js';
 
 export const registro = async (req, res) => {
-    // construccion de un nuevo usuario
-    const { correo, contrasenia, estado_cuenta } = req.body;
+    // construccion de una nueva cuenta
+    const { correo, contrasenia, tipo_cuenta, estado_cuenta } = req.body;
 
     try {
-        // creacion de un nuevo usuario
+        // creacion de una cuenta
         const cuenta = new Cuenta({
             correo,
             contrasenia,
+            tipo_cuenta,
             estado_cuenta
         });
 
