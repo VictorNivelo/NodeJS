@@ -1,13 +1,17 @@
 import mongoose from 'mongoose';
 
-const cuentaSchema = mongoose.Schema({
+const cuentaSchema = new mongoose.Schema({
     correo: {
         type: String,
         required: true,
-        trim: true,
         unique: true,
+        trim: true,
     },
     contrasenia: {
+        type: String,
+        required: true,
+    },
+    estado_cuenta: {
         type: String,
         required: true,
     },

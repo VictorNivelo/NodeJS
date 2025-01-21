@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const usuarioSchema = mongoose.Schema({
+const usuarioSchema = new mongoose.Schema({
     tipo_dni: {
         type: String,
         required: true
