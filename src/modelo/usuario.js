@@ -3,41 +3,42 @@ import mongoose from 'mongoose';
 const usuarioSchema = mongoose.Schema({
     tipo_dni: {
         type: String,
-        required: true,
+        required: true
     },
     numero_dni: {
         type: String,
         required: true,
-        unique: true,
+        unique: true
     },
     nombre: {
         type: String,
-        required: true,
+        required: true
     },
     apellido: {
         type: String,
-        required: true,
+        required: true
     },
     correo: {
         type: String,
         required: true,
         unique: true,
+        trim: true
     },
     genero: {
         type: String,
-        required: true,
+        required: true
     },
     fecha_nacimiento: {
         type: Date,
-        required: true,
+        required: true
     },
     telefono: {
         type: String,
-        required: true,
+        required: true
     },
     direccion: {
         type: String,
-        required: true,
+        required: true
     },
 });
 
