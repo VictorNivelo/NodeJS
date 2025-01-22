@@ -4,3 +4,5 @@ const tipo_dni = {
     Pasaporte: "Pasaporte",
     Licencia_conducir: "Licencia de conducir",
 }
+
+export default tipo_dni;

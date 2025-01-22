@@ -6,6 +6,17 @@ export const registro = async (req, res) => {
     const { correo, contrasenia, tipo_cuenta, estado_cuenta } = req.body;
 
     try {
+        // validacion de la existencia de una cuenta
+        const cuentaExistente = await Cuenta.findOne({ correo });
+
+        if (cuentaExistente) {
+            // mensaje de respuesta en consola
+            console.log('Ya existe una cuenta con ese correo');
+            return res.status(400).json({
+                mensaje: 'Ya existe una cuenta con ese correo'
+            });
+        }
+
         // creacion de una cuenta
         const cuenta = new Cuenta({
             correo,
@@ -19,6 +30,26 @@ export const registro = async (req, res) => {
 
         // guardado en la base de datos
         await cuenta.save();
+
+        // creacion de una persona
+        const persona = new Persona({
+            tipo_dni,
+            numero_dni,
+            nombre,
+            apellido,
+            correo_personal,
+            genero,
+            fecha_nacimiento,
+            telefono,
+            direccion,
+            cuenta: cuenta._id
+        });
+
+        // mostrar la persona en consola
+        console.log(persona);
+
+        // guardado de la persona en la base de datos
+        await persona.save();
 
         // mensaje de respuesta en consola
         console.log('Cuenta registrada');

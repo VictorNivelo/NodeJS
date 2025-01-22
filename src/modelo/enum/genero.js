@@ -5,3 +5,5 @@ const genero = {
     Femenino: 'Femenino',
     Otro: 'Otro'
 };
+
+export default genero;

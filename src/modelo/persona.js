@@ -21,7 +21,7 @@ const personaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    correo: {
+    correo_personal: {
         type: String,
         required: true,
         unique: true,
@@ -44,6 +44,11 @@ const personaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    cuenta: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'cuenta',
+        required: true
+    }
 });
 
 export default mongoose.model('persona', personaSchema);
