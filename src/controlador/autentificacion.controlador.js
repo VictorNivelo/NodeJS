@@ -31,6 +31,17 @@ export const registro = async (req, res) => {
         // guardado en la base de datos
         await cuenta.save();
 
+        // validacion de la existencia de una persona
+        // const personaExistente = await Persona.findOne({ numero_dni });
+
+        // if (personaExistente) {
+        //     // mensaje de respuesta en consola
+        //     console.log('Ya existe una persona con ese número de DNI');
+        //     return res.status(400).json({ 
+        //         mensaje: 'Ya existe una persona con ese número de DNI' 
+        //     });
+        // }
+
         // creacion de una persona
         const persona = new Persona({
             tipo_dni,
@@ -56,6 +67,9 @@ export const registro = async (req, res) => {
 
         // mensaje de respuesta
         res.send('Cuenta registrada');
+
+        // respuesta en formato json
+        // res.json(cuentaGuardada);
     }
     catch (error) {
         console.log('Error al registrar', error);

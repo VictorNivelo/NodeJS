@@ -1,8 +1,8 @@
 import { conectarBD } from './bd.js';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import app from './app.js';
 import express from 'express';
+import app from './app.js';
 
 // console.log(__dirname)
 
