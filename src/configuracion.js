@@ -1,0 +1,1 @@
+export const token_secreto = "mi_token_secreto";

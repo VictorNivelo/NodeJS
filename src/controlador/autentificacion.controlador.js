@@ -1,3 +1,4 @@
+import { crearToken } from '../librerias/jwt.js';
 import Persona from '../modelo/persona.js';
 import Cuenta from '../modelo/cuenta.js';
 import bcrypt from 'bcryptjs';
@@ -66,7 +67,6 @@ export const registro = async (req, res) => {
         // await persona.save();
 
         // mensaje de respuesta en consola
-        console.log('Cuenta registrada');
 
         // // mensaje de respuesta
         // res.send('Cuenta registrada');
@@ -74,11 +74,28 @@ export const registro = async (req, res) => {
         // // respuesta en formato json
         // res.json(cuentaGuardada);
 
-        // respuesta en json con mensaje
-        res.status(201).json({
-            mensaje: 'Cuenta registrada exitosamente',
-            cuenta: cuentaGuardada
+        // // respuesta en json con mensaje
+        // res.status(201).json({
+        //     mensaje: 'Cuenta registrada exitosamente',
+        //     cuenta: cuentaGuardada
+        // });
+
+        // creacion de un token
+        const token = await crearToken({ id: cuentaGuardada._id, correo: cuentaGuardada.correo });
+
+        // respuesta mediante cookie
+        res.cookie("token", token)
+
+        // respuesta del token en consola
+        console.log('Token generado', token);
+
+        // respuesta en formato json
+        res.json({
+            mensaje: "Cuenta registrada exitosamente",
         });
+
+        // mensaje de respuesta en consola
+        console.log('Cuenta registrada exitosamente');
     }
     catch (error) {
         console.log('Error al registrar', error);
