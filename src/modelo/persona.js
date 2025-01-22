@@ -1,9 +1,12 @@
+import tipo_dni from './enum/tipo_dni.js';
+import genero from './enum/genero.js';
 import mongoose from 'mongoose';
 
 const personaSchema = new mongoose.Schema({
     tipo_dni: {
         type: String,
-        required: true
+        required: true,
+        enum: Object.values(tipo_dni),
     },
     numero_dni: {
         type: String,
@@ -26,7 +29,8 @@ const personaSchema = new mongoose.Schema({
     },
     genero: {
         type: String,
-        required: true
+        required: true,
+        enum: Object.values(genero),
     },
     fecha_nacimiento: {
         type: Date,

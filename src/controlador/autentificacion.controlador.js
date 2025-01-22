@@ -20,8 +20,11 @@ export const registro = async (req, res) => {
         // guardado en la base de datos
         await cuenta.save();
 
+        // mensaje de respuesta en consola
+        console.log('Cuenta registrada');
+
         // mensaje de respuesta
-        res.send('Registrando')
+        res.send('Cuenta registrada');
     }
     catch (error) {
         console.log('Error al registrar', error);
