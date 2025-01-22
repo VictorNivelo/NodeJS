@@ -11,5 +11,15 @@ rutas.get('/inicio_sesion', inicio_sesion)
 rutas.post('/registro', registro)
 rutas.post('/inicio_sesion', inicio_sesion)
 
+// actualizar
+
+rutas.put('/registro', registro)
+rutas.put('/inicio_sesion', inicio_sesion)
+
+// eliminar
+
+rutas.delete('/registro', registro)
+rutas.delete('/inicio_sesion', inicio_sesion)
+
 // exportar las rutas
 export default rutas

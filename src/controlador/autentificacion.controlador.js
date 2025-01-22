@@ -1,5 +1,6 @@
 import Persona from '../modelo/persona.js';
 import Cuenta from '../modelo/cuenta.js';
+import bcrypt from 'bcryptjs';
 
 export const registro = async (req, res) => {
     // construccion de una nueva cuenta
@@ -17,10 +18,12 @@ export const registro = async (req, res) => {
             });
         }
 
+        const encriptarContrasenia = await bcrypt.hash(contrasenia, 10);
+
         // creacion de una cuenta
         const cuenta = new Cuenta({
             correo,
-            contrasenia,
+            contrasenia: encriptarContrasenia,
             tipo_cuenta,
             estado_cuenta
         });
@@ -29,7 +32,7 @@ export const registro = async (req, res) => {
         console.log(cuenta);
 
         // guardado en la base de datos
-        await cuenta.save();
+        const cuentaGuardada = await cuenta.save();
 
         // validacion de la existencia de una persona
         // const personaExistente = await Persona.findOne({ numero_dni });
@@ -42,34 +45,40 @@ export const registro = async (req, res) => {
         //     });
         // }
 
-        // creacion de una persona
-        const persona = new Persona({
-            tipo_dni,
-            numero_dni,
-            nombre,
-            apellido,
-            correo_personal,
-            genero,
-            fecha_nacimiento,
-            telefono,
-            direccion,
-            cuenta: cuenta._id
-        });
+        // // creacion de una persona
+        // const persona = new Persona({
+        //     tipo_dni,
+        //     numero_dni,
+        //     nombre,
+        //     apellido,
+        //     correo_personal,
+        //     genero,
+        //     fecha_nacimiento,
+        //     telefono,
+        //     direccion,
+        //     cuenta: cuenta._id
+        // });
 
-        // mostrar la persona en consola
-        console.log(persona);
+        // // mostrar la persona en consola
+        // console.log(persona);
 
-        // guardado de la persona en la base de datos
-        await persona.save();
+        // // guardado de la persona en la base de datos
+        // await persona.save();
 
         // mensaje de respuesta en consola
         console.log('Cuenta registrada');
 
-        // mensaje de respuesta
-        res.send('Cuenta registrada');
+        // // mensaje de respuesta
+        // res.send('Cuenta registrada');
 
-        // respuesta en formato json
+        // // respuesta en formato json
         // res.json(cuentaGuardada);
+
+        // respuesta en json con mensaje
+        res.status(201).json({
+            mensaje: 'Cuenta registrada exitosamente',
+            cuenta: cuentaGuardada
+        });
     }
     catch (error) {
         console.log('Error al registrar', error);

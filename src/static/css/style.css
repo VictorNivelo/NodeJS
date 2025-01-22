@@ -8,3 +8,7 @@ body {
     background: var(--fondo);
     color: var(--blanco);
 }
+
+body::-webkit-scrollbar {
+    display: none;
+}
