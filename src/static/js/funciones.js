@@ -54,42 +54,76 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Función para obtener usuario de cookies
-function obtenerUsuario() {
+function obtener_usuario() {
     // Obtener cookie de usuario
     const usuarioCookie = document.cookie
         .split('; ')
         .find(row => row.startsWith('usuario='));
 
+    // imprime el valor de la cookie
+    console.log('Cookie usuario:', usuarioCookie);
+
     // Si existe la cookie
     if (usuarioCookie) {
-        return JSON.parse(decodeURIComponent(usuarioCookie.split('=')[1]));
+        const usuario = JSON.parse(decodeURIComponent(usuarioCookie.split('=')[1]));
+        console.log('Usuario parseado:', usuario);
+        return usuario;
     }
     return null;
 }
-
 // Función para actualizar el menú con el correo del usuario
-function actualizarMenuUsuario() {
+function actualizar_menu_usuario() {
     // Obtener usuario
-    const usuario = obtenerUsuario();
+    const usuario = obtener_usuario();
 
     // Obtener botón de menú
-    const menuButton = document.getElementById('menuUsuario');
+    const boton_menu = document.getElementById('menuUsuario');
 
-    // Si existe el usuario y el correo
-    if (usuario && usuario.correo) {
-        menuButton.innerHTML = `
+    // Si existe el botón y el usuario
+    if (boton_menu && usuario && usuario.correo) {
+        boton_menu.innerHTML = `
             <i class="bi bi-person-circle me-1"></i>
             ${usuario.correo}
         `;
+    } else {
+        console.log('No se pudo actualizar el menú:', {
+            menuExists: !!boton_menu,
+            userExists: !!usuario,
+            emailExists: usuario?.correo
+        });
+    }
+}
+
+function inicializar_tema() {
+    // Obtener tema guardado
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+
+    // Cambiar tema
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    // Obtener icono
+    const tema_icono = document.getElementById('theme-icon');
+
+    // Cambiar icono dependiendo del tema
+    if (tema_icono) {
+        tema_icono.className = savedTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+
+    // Cambiar logo
+    const logo = document.querySelector('header img');
+
+    // Cambiar logo dependiendo del tema
+    if (logo) {
+        logo.src = savedTheme === 'light' ? 'img/vn_oscuro.png' : 'img/vn_claro.png';
     }
 }
 
 // Inicialización cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar tema
-    inicializarTema();
-    // Actualizar menú usuario
-    actualizarMenuUsuario();
+    // Inicial
+    inicializar_tema();
+    // Actualizar menú de usuario
+    actualizar_menu_usuario();
 });
 
 // Función para cerrar sesión

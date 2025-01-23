@@ -8,7 +8,7 @@ rutas.get('/acerca', (req, res) => res.render('acerca'))
 rutas.get('/contacto', (req, res) => res.render('contacto'))
 
 // usuario
-rutas.get('/perfil', (req, res) => res.render('usuario/perfil'))
+// rutas.get('/perfil', (req, res) => res.render('usuario/perfil'))
 // rutas.get('/registro', (req, res) => res.render('usuario/registro'))
 // rutas.get('/inicio_sesion', (req, res) => res.render('usuario/inicio_sesion'))
 

@@ -3,10 +3,18 @@ import { Router } from 'express'
 
 const rutas = Router()
 
-// crud cuenta
+// crud de cuenta
+
+// obtener
 rutas.get('/cuenta', listarCuenta)
+
+// enviar
 rutas.post('/cuenta', crearCuenta);
+
+// actualizar
 rutas.put('/cuenta/:id', actualizarCuenta);
+
+// eliminar
 rutas.delete('/cuenta/:id', eliminarCuenta);
 
 export default rutas

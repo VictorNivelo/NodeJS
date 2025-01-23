@@ -148,7 +148,8 @@ export const inicio_sesion = async (req, res) => {
 
         // Buscar la cuenta
         const cuentaEncontrada = await Cuenta.findOne({ correo });
-        
+
+        // Validar si la cuenta existe
         if (!cuentaEncontrada) {
             // mensaje de respuesta para el frontend
             return res.status(400).json({
@@ -159,7 +160,8 @@ export const inicio_sesion = async (req, res) => {
 
         // Validar contraseña
         const contraseniaValida = await bcrypt.compare(contrasenia, cuentaEncontrada.contrasenia);
-        
+
+        // Si la contraseña no es válida
         if (!contraseniaValida) {
             // mensaje de respuesta para el frontend
             return res.status(400).json({
@@ -207,17 +209,22 @@ export const inicio_sesion = async (req, res) => {
     }
 };
 
+// metodo para cerrar sesion
 export const cerrar_sesion = async (req, res) => {
     try {
         // Limpiar la cookie del token
         res.clearCookie('token');
-        
+
+        res.cookie("token", "", {
+            expires: new Date(0)
+        });
+
         // Responder con éxito
         return res.json({
             error: false,
             mensaje: 'Sesión cerrada exitosamente'
         });
-        
+
     } catch (error) {
         // mensaje de error en consola
         console.log('Error al cerrar sesión', error);
@@ -225,6 +232,36 @@ export const cerrar_sesion = async (req, res) => {
         return res.status(500).json({
             error: true,
             mensaje: 'Error al cerrar sesión'
+        });
+    }
+};
+
+// metodo para obtener el perfil de un usuario
+export const perfil = async (req, res) => {
+    try {
+        // Obtener el usuario desde la cookie
+        const usuario = req.usuario;
+
+        // Buscar la cuenta
+        const cuenta = await Cuenta.findOne({ correo: usuario.correo });
+
+        // Responder con éxito
+        return res.json({
+            error: false,
+            mensaje: 'Perfil obtenido exitosamente',
+            usuario: {
+                correo: cuenta.correo,
+                tipo: cuenta.tipo_cuenta
+            }
+        });
+
+    } catch (error) {
+        // mensaje de error en consola
+        console.log('Error al obtener el perfil', error);
+        // mensaje de error para el frontend
+        return res.status(500).json({
+            error: true,
+            mensaje: 'Error al obtener el perfil'
         });
     }
 };
