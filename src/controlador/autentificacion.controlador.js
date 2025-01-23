@@ -23,6 +23,15 @@ export const registro = async (req, res) => {
     const { correo, contrasenia, tipo_cuenta: tipoCuenta, estado_cuenta } = req.body;
 
     try {
+
+        // // validacion de los campos
+        // if (!correo || !contrasenia || !tipoCuenta) {
+        //     return res.status(400).json({
+        //         // mensaje de respuesta para el frontend
+        //         mensaje: 'Todos los campos son requeridos'
+        //     });
+        // }
+        
         // validacion de la existencia de una cuenta
         const cuentaExistente = await Cuenta.findOne({ correo });
 
