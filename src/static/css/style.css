@@ -127,6 +127,62 @@ small {
     transform: rotate(360deg);
 }
 
+.dropdown-menu {
+    background-color: var(--nav-bg);
+    border: 1px solid var(--borde);
+    padding: 0.5rem 0;
+    box-shadow: 0 0.5rem 1rem var(--card-shadow);
+}
+
+.dropdown-item {
+    color: var(--texto-primario);
+    padding: 0.7rem 1.2rem;
+    transition: var(--transition);
+}
+
+.dropdown-item:hover {
+    background-color: var(--hover);
+    color: var(--texto-primario);
+}
+
+.dropdown-item i {
+    width: 1.2rem;
+    text-align: center;
+    margin-right: 0.5rem;
+}
+
+.dropdown-divider {
+    border-color: var(--borde);
+    margin: 0.5rem 0;
+}
+
+#menuUsuario {
+    background-color: transparent;
+    border: 1px solid var(--borde);
+    color: var(--texto-primario);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#menuUsuario:hover {
+    background-color: var(--hover);
+}
+
+#menuUsuario i {
+    font-size: 1.1rem;
+}
+
+.dropdown-toggle::after {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
 .card {
     background: var(--nav-bg);
     border: 1px solid var(--borde);

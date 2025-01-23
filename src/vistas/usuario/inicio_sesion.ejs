@@ -9,7 +9,74 @@
 </head>
 
 <body>
-    <h1>Inicio sesion</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Inicio de Sesión</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="loginForm" action="/inicio_sesion" method="POST">
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="correo" name="correo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contrasenia" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="contrasenia" name="contrasenia"
+                                    required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                            </div>
+                        </form>
+                        <div class="text-center mt-3">
+                            <p>¿No tienes una cuenta? <a href="/registro">Regístrate</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                const res = await fetch('/inicio_sesion', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData))
+                });
+                const data = await res.json();
+                if (data.error) {
+                    await Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.mensaje
+                    });
+                } else {
+                    await Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: data.mensaje,
+                        timer: 1500
+                    });
+                    window.location.href = '/administrador';
+                }
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error al procesar la solicitud'
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

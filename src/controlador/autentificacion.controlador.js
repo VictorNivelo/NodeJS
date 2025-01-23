@@ -4,6 +4,7 @@ import Persona from '../modelo/persona.js';
 import Cuenta from '../modelo/cuenta.js';
 import bcrypt from 'bcryptjs';
 
+// metodo para el registro de una cuenta
 export const registro = async (req, res) => {
 
     // si es get se renderiza la vista de registro
@@ -128,14 +129,105 @@ export const registro = async (req, res) => {
     }
     catch (error) {
         console.log('Error al registrarse', error);
-        res.status(500).json({ 
+        res.status(500).json({
             mensaje: 'Error al registrarse',
-            error: error.message 
+            error: error.message
         });
     }
 };
 
-export const inicio_sesion = (req, res) => { res.send('Inicio de sesion') };
+// metodo para el inicio de sesion
+export const inicio_sesion = async (req, res) => {
+    // Si es GET renderiza la vista
+    if (req.method === 'GET') {
+        return res.render('usuario/inicio_sesion');
+    }
+
+    try {
+        const { correo, contrasenia } = req.body;
+
+        // Buscar la cuenta
+        const cuentaEncontrada = await Cuenta.findOne({ correo });
+        
+        if (!cuentaEncontrada) {
+            // mensaje de respuesta para el frontend
+            return res.status(400).json({
+                error: true,
+                mensaje: 'Correo o contraseña incorrecta'
+            });
+        }
+
+        // Validar contraseña
+        const contraseniaValida = await bcrypt.compare(contrasenia, cuentaEncontrada.contrasenia);
+        
+        if (!contraseniaValida) {
+            // mensaje de respuesta para el frontend
+            return res.status(400).json({
+                error: true,
+                mensaje: 'Correo o contraseña incorrecta'
+            });
+        }
+
+        // Crear token
+        const token = await crearToken({
+            id: cuentaEncontrada._id,
+            correo: cuentaEncontrada.correo
+        });
+
+        // Establecer cookie
+        res.cookie("token", token);
+
+        // Establecer cookie con los datos del usuario
+        res.cookie("usuario", JSON.stringify({
+            correo: cuentaEncontrada.correo,
+            tipo: cuentaEncontrada.tipo_cuenta
+        }));
+
+        // Redireccionar al dashboard
+        // res.redirect('/panel_administrador');
+
+        // Responder con éxito
+        return res.json({
+            error: false,
+            mensaje: 'Inicio de sesión exitoso',
+            usuario: {
+                correo: cuentaEncontrada.correo,
+                tipo: cuentaEncontrada.tipo_cuenta
+            }
+        });
+
+    } catch (error) {
+        // mensaje de error en consola
+        console.log('Error al iniciar sesión', error);
+        // mensaje de error para el frontend
+        res.status(500).json({
+            mensaje: 'Error al iniciar sesión',
+            error: error.message
+        });
+    }
+};
+
+export const cerrar_sesion = async (req, res) => {
+    try {
+        // Limpiar la cookie del token
+        res.clearCookie('token');
+        
+        // Responder con éxito
+        return res.json({
+            error: false,
+            mensaje: 'Sesión cerrada exitosamente'
+        });
+        
+    } catch (error) {
+        // mensaje de error en consola
+        console.log('Error al cerrar sesión', error);
+        // mensaje de error para el frontend
+        return res.status(500).json({
+            error: true,
+            mensaje: 'Error al cerrar sesión'
+        });
+    }
+};
 
 // envio de html
 // export const registro = (req, res) => { res.render('usuario/registro') };

@@ -3,7 +3,6 @@ const estado_cuenta = {
     Activo: "Activo",
     Inactivo: "Inactivo",
     Suspendido: "Suspendido",
-    Eliminado: "Eliminado",
     Bloqueado: "Bloqueado",
 }
 

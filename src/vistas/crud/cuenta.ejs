@@ -154,6 +154,11 @@
             </div>
         </div>
 
+        <form id="formEliminar" method="POST" style="display: none;">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" id="deleteId" name="id">
+        </form>
+
         <script>
             // Preparar edición
             function prepararEdicion(id, correo, tipoCuenta, estadoCuenta) {
