@@ -7,6 +7,11 @@
     --texto-secundario: rgb(200, 200, 200);
     --borde: rgba(255, 255, 255, 0.1);
     --hover: rgba(255, 255, 255, 0.1);
+    --input-bg: rgb(65, 65, 65);
+    --input-focus: rgb(75, 75, 75);
+    --card-shadow: rgba(0, 0, 0, 0.2);
+    --btn-primary: #0d6efd;
+    --btn-hover: #0b5ed7;
 }
 
 /* Tema claro */
@@ -18,6 +23,9 @@
     --texto-secundario: rgb(100, 100, 100);
     --borde: rgba(0, 0, 0, 0.1);
     --hover: rgba(0, 0, 0, 0.05);
+    --input-bg: rgb(255, 255, 255);
+    --input-focus: rgb(248, 248, 248);
+    --card-shadow: rgba(0, 0, 0, 0.1);
 }
 
 /* Tema oscuro */
@@ -107,18 +115,43 @@ small {
     border: 1px solid var(--borde);
 }
 
-.btn {
-    transition: var(--transition);
+.card-header {
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--borde);
+    padding: 1rem;
 }
 
-.form-control {
+.form-control,
+.form-select {
     background: var(--nav-bg);
     border: 1px solid var(--borde);
     color: var(--texto-primario);
 }
 
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
     background: var(--nav-bg);
     color: var(--texto-primario);
     border-color: var(--texto-secundario);
+}
+
+.form-label {
+    color: var(--texto-primario);
+    font-weight: 500;
+}
+
+.btn {
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--btn-primary);
+    border-color: var(--btn-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-hover);
+    border-color: var(--btn-hover);
+    transform: translateY(-1px);
 }
