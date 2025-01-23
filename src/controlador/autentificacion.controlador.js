@@ -1,11 +1,26 @@
+import tipo_cuenta from '../modelo/enum/tipo_cuenta.js';
 import { crearToken } from '../librerias/jwt.js';
 import Persona from '../modelo/persona.js';
 import Cuenta from '../modelo/cuenta.js';
 import bcrypt from 'bcryptjs';
 
 export const registro = async (req, res) => {
+
+    // si es get se renderiza la vista de registro
+    if (req.method === 'GET') {
+        // Obtener los tipos de cuenta
+        const tiposCuenta = Object.values(tipo_cuenta);
+        // Renderizar la vista de registro
+        return res.render('usuario/registro', {
+            // Pasar los tipos de cuenta a la vista
+            tipos_cuenta: tiposCuenta
+        });
+    }
+
+    console.log(tipo_cuenta);
+
     // construccion de una nueva cuenta
-    const { correo, contrasenia, tipo_cuenta, estado_cuenta } = req.body;
+    const { correo, contrasenia, tipo_cuenta: tipoCuenta, estado_cuenta } = req.body;
 
     try {
         // validacion de la existencia de una cuenta
@@ -15,18 +30,20 @@ export const registro = async (req, res) => {
             // mensaje de respuesta en consola
             console.log('Ya existe una cuenta con ese correo');
             return res.status(400).json({
+                // mensaje de respuesta para el frontend
                 mensaje: 'Ya existe una cuenta con ese correo'
             });
         }
 
+        // encriptacion de la contraseña
         const encriptarContrasenia = await bcrypt.hash(contrasenia, 10);
 
         // creacion de una cuenta
         const cuenta = new Cuenta({
             correo,
             contrasenia: encriptarContrasenia,
-            tipo_cuenta,
-            estado_cuenta
+            tipo_cuenta: tipoCuenta,
+            estado_cuenta: estado_cuenta || 'Activo'
         });
 
         // mostrar la cuenta en consola
@@ -89,10 +106,13 @@ export const registro = async (req, res) => {
         // respuesta del token en consola
         console.log('Token generado', token);
 
+        // mandar al inicio de sesion
+        res.redirect('/inicio_sesion');
+
         // respuesta en formato json
-        res.json({
-            mensaje: "Cuenta registrada exitosamente",
-        });
+        // res.json({
+        //     mensaje: "Cuenta registrada exitosamente",
+        // });
 
         // mensaje de respuesta en consola
         console.log('Cuenta registrada exitosamente');

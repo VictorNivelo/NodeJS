@@ -4,13 +4,14 @@ import { fileURLToPath } from 'url';
 import express from 'express';
 import app from './app.js';
 
-// console.log(__dirname)
-
 // puerto de escucha
 const puerto = 3000;
 
 // direccion base
 const __dirname = dirname(fileURLToPath(import.meta.url))
+
+// imprime la direccion base en consola
+// console.log(__dirname)
 
 // direccion de la carpeta static
 app.use(express.static(join(__dirname, "static")))
