@@ -2,13 +2,123 @@
     --fondo: rgb(57, 57, 57);
     --negro: rgb(0, 0, 0);
     --blanco: rgb(255, 255, 255);
+    --transition: all 0.3s ease;
+    --texto-primario: rgb(255, 255, 255);
+    --texto-secundario: rgb(200, 200, 200);
+    --borde: rgba(255, 255, 255, 0.1);
+    --hover: rgba(255, 255, 255, 0.1);
+}
+
+/* Tema claro */
+:root[data-theme="light"] {
+    --fondo: rgb(255, 255, 255);
+    --texto: rgb(0, 0, 0);
+    --nav-bg: rgb(245, 245, 245);
+    --texto-primario: rgb(0, 0, 0);
+    --texto-secundario: rgb(100, 100, 100);
+    --borde: rgba(0, 0, 0, 0.1);
+    --hover: rgba(0, 0, 0, 0.05);
+}
+
+/* Tema oscuro */
+:root[data-theme="dark"] {
+    --fondo: rgb(57, 57, 57);
+    --texto: rgb(255, 255, 255);
+    --nav-bg: rgb(40, 40, 40);
+    --texto-primario: rgb(255, 255, 255);
+    --texto-secundario: rgb(200, 200, 200);
+    --borde: rgba(255, 255, 255, 0.1);
+    --hover: rgba(255, 255, 255, 0.1);
 }
 
 body {
     background: var(--fondo);
-    color: var(--blanco);
+    color: var(--texto-primario);
+    transition: var(--transition);
 }
 
 body::-webkit-scrollbar {
     display: none;
+}
+
+.navbar {
+    background-color: var(--nav-bg) !important;
+    border-bottom: 1px solid var(--borde);
+    transition: var(--transition);
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--texto-primario) !important;
+}
+
+.nav-link:hover {
+    color: var(--texto-secundario) !important;
+}
+
+.display-1,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--texto-primario);
+}
+
+p,
+span,
+small {
+    color: var(--texto-secundario);
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 2px solid var(--texto);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background: var(--hover);
+}
+
+.theme-toggle i {
+    color: var(--texto-primario);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.theme-toggle:hover i {
+    transform: rotate(360deg);
+}
+
+/* Ajustes adicionales para elementos Bootstrap */
+.card {
+    background: var(--nav-bg);
+    border: 1px solid var(--borde);
+}
+
+.btn {
+    transition: var(--transition);
+}
+
+.form-control {
+    background: var(--nav-bg);
+    border: 1px solid var(--borde);
+    color: var(--texto-primario);
+}
+
+.form-control:focus {
+    background: var(--nav-bg);
+    color: var(--texto-primario);
+    border-color: var(--texto-secundario);
 }

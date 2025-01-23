@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 // rutas base
-// app.use(rutasBase);
+app.use(rutasBase);
 
 // rutas de autentificación
 app.use(autentificacionRutas);
