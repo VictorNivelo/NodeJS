@@ -31,7 +31,7 @@ export const registro = async (req, res) => {
         //         mensaje: 'Todos los campos son requeridos'
         //     });
         // }
-        
+
         // validacion de la existencia de una cuenta
         const cuentaExistente = await Cuenta.findOne({ correo });
 
@@ -127,8 +127,11 @@ export const registro = async (req, res) => {
         console.log('Cuenta registrada exitosamente');
     }
     catch (error) {
-        console.log('Error al registrar', error);
-        res.status(500).send('Error al registrar');
+        console.log('Error al registrarse', error);
+        res.status(500).json({ 
+            mensaje: 'Error al registrarse',
+            error: error.message 
+        });
     }
 };
 

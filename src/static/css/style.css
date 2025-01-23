@@ -14,29 +14,42 @@
     --btn-hover: #0b5ed7;
 }
 
-/* Tema claro */
 :root[data-theme="light"] {
-    --fondo: rgb(255, 255, 255);
-    --texto: rgb(0, 0, 0);
-    --nav-bg: rgb(245, 245, 245);
-    --texto-primario: rgb(0, 0, 0);
-    --texto-secundario: rgb(100, 100, 100);
-    --borde: rgba(0, 0, 0, 0.1);
-    --hover: rgba(0, 0, 0, 0.05);
-    --input-bg: rgb(255, 255, 255);
-    --input-focus: rgb(248, 248, 248);
-    --card-shadow: rgba(0, 0, 0, 0.1);
+    --fondo: #f8f9fa;
+    --nav-bg: #ffffff;
+    --texto-primario: #212529;
+    --texto-secundario: #6c757d;
+    --borde: rgba(0, 0, 0, 0.125);
+    --hover: rgba(0, 0, 0, 0.03);
+    --input-bg: #ffffff;
+    --input-focus: #f8f9fa;
+    --card-shadow: rgba(0, 0, 0, 0.05);
+    --table-header: #f8f9fa;
+    --table-bg: #ffffff;
+    --table-stripe: #f8f9fa;
+    --table-text: #212529;
+    --modal-bg: #ffffff;
+    --swal-bg: #ffffff;
+    --swal-text: #212529;
 }
 
-/* Tema oscuro */
 :root[data-theme="dark"] {
-    --fondo: rgb(57, 57, 57);
-    --texto: rgb(255, 255, 255);
-    --nav-bg: rgb(40, 40, 40);
-    --texto-primario: rgb(255, 255, 255);
-    --texto-secundario: rgb(200, 200, 200);
-    --borde: rgba(255, 255, 255, 0.1);
-    --hover: rgba(255, 255, 255, 0.1);
+    --fondo: #212529;
+    --nav-bg: #2c3034;
+    --texto-primario: #e9ecef;
+    --texto-secundario: #adb5bd;
+    --borde: rgba(255, 255, 255, 0.15);
+    --hover: rgba(255, 255, 255, 0.05);
+    --input-bg: #2c3034;
+    --input-focus: #343a40;
+    --card-shadow: rgba(0, 0, 0, 0.25);
+    --table-header: #343a40;
+    --table-bg: #2c3034;
+    --table-stripe: #343a40;
+    --table-text: #e9ecef;
+    --modal-bg: #2c3034;
+    --swal-bg: #2c3034;
+    --swal-text: #e9ecef;
 }
 
 body {
@@ -74,6 +87,11 @@ h6 {
     color: var(--texto-primario);
 }
 
+h2 {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
 p,
 span,
 small {
@@ -109,10 +127,13 @@ small {
     transform: rotate(360deg);
 }
 
-/* Ajustes adicionales para elementos Bootstrap */
 .card {
     background: var(--nav-bg);
     border: 1px solid var(--borde);
+}
+
+.container {
+    padding: 2rem 1rem;
 }
 
 .card-header {
@@ -121,18 +142,69 @@ small {
     padding: 1rem;
 }
 
+.table {
+    background-color: var(--table-bg) !important;
+    color: var(--table-text) !important;
+    margin-bottom: 2rem;
+    border: 1px solid var(--borde);
+}
+
+.table thead th {
+    background-color: var(--table-header) !important;
+    color: var(--texto-primario) !important;
+    font-weight: 600;
+    border-bottom: 2px solid var(--borde) !important;
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    color: var(--table-text) !important;
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: var(--table-stripe) !important;
+}
+
+.table tbody td {
+    padding: 1rem;
+    color: var(--table-text) !important;
+    border-bottom: 1px solid var(--borde);
+    background-color: transparent !important;
+}
+
+.table tbody tr:hover {
+    background-color: var(--hover) !important;
+}
+
+.modal-content {
+    background-color: var(--modal-bg) !important;
+}
+
+.modal-header,
+.modal-footer {
+    background-color: var(--modal-bg) !important;
+    border-color: var(--borde) !important;
+    padding: 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
 .form-control,
 .form-select {
-    background: var(--nav-bg);
+    background-color: var(--input-bg);
     border: 1px solid var(--borde);
     color: var(--texto-primario);
 }
 
 .form-control:focus,
 .form-select:focus {
-    background: var(--nav-bg);
+    background-color: var(--input-focus);
+    border-color: var(--btn-primary);
     color: var(--texto-primario);
-    border-color: var(--texto-secundario);
 }
 
 .form-label {
@@ -141,7 +213,9 @@ small {
 }
 
 .btn {
-    transition: var(--transition);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
 }
 
 .btn-primary {
@@ -154,4 +228,51 @@ small {
     background-color: var(--btn-hover);
     border-color: var(--btn-hover);
     transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 0.25rem 0.75rem;
+}
+
+.btn-warning {
+    background: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+
+.btn-warning:hover {
+    background: #ffb300;
+    border-color: #ffb300;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    border-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.swal2-popup {
+    background-color: var(--swal-bg) !important;
+    color: var(--swal-text) !important;
+}
+
+.swal2-title,
+.swal2-content {
+    color: var(--swal-text) !important;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #f8bb86 !important;
+    color: #f8bb86 !important;
 }

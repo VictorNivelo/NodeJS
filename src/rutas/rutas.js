@@ -15,10 +15,6 @@ rutas.get('/perfil', (req, res) => res.render('usuario/perfil'))
 // administrador
 rutas.get('/administrador', (req, res) => res.render('administrador/panel_administrador'))
 
-// crud
-rutas.get('/usuario', (req, res) => res.render('crud/usuario'))
-rutas.get('/producto', (req, res) => res.render('crud/producto'))
-
 // errores
 rutas.get('/404', (req, res) => res.render('error/404'))
 rutas.get('/500', (req, res) => res.render('error/500'))

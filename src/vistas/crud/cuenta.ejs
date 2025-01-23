@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de cuentas</title>
+    <%- include("../componentes/head")%>
+</head>
+
+<body>
+    <%- include("../componentes/navegacion")%>
+
+        <div class="container mt-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="mb-0">Gestión de Cuentas</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearCuentaModal">
+                    <i class="bi bi-plus-circle me-1"></i> Crear Nueva Cuenta
+                </button>
+            </div>
+
+            <!-- Tabla de cuentas -->
+            <table class="table table-striped">
+                <thead>
+                    <tr class="text-center">
+                        <th>Correo</th>
+                        <th>Tipo de Cuenta</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% cuentas.forEach(cuenta=> { %>
+                        <tr class="text-center">
+                            <td>
+                                <%= cuenta.correo %>
+                            </td>
+                            <td>
+                                <%= cuenta.tipo_cuenta %>
+                            </td>
+                            <td>
+                                <%= cuenta.estado_cuenta %>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editarCuentaModal"
+                                    onclick="prepararEdicion('<%= cuenta._id %>', '<%= cuenta.correo %>', '<%= cuenta.tipo_cuenta %>', '<%= cuenta.estado_cuenta %>')">
+                                    <i class="bi bi-pencil-square"></i> Editar
+                                </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#eliminarCuentaModal"
+                                    onclick="prepararEliminacion('<%= cuenta._id %>')">
+                                    <i class="bi bi-trash"></i> Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal Crear Cuenta -->
+        <div class="modal fade" id="crearCuentaModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Crear Nueva Cuenta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form method="POST" action="/cuenta">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="correo" name="correo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contrasenia" class="form-label">Contraseña:</label>
+                                <input type="password" class="form-control" id="contrasenia" name="contrasenia"
+                                    required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tipo_cuenta" class="form-label">Tipo de Cuenta:</label>
+                                <select class="form-select" id="tipo_cuenta" name="tipo_cuenta" required>
+                                    <% tipos_cuenta.forEach(tipo=> { %>
+                                        <option value="<%= tipo %>">
+                                            <%= tipo %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="estado_cuenta" class="form-label">Estado:</label>
+                                <select class="form-select" id="estado_cuenta" name="estado_cuenta" required>
+                                    <% estados_cuenta.forEach(estado=> { %>
+                                        <option value="<%= estado %>">
+                                            <%= estado %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Crear</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Editar Cuenta -->
+        <div class="modal fade" id="editarCuentaModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar Cuenta</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form id="formEditar" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                        <input type="hidden" id="editId" name="id">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="editCorreo" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="editCorreo" name="correo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editTipoCuenta" class="form-label">Tipo de Cuenta:</label>
+                                <select class="form-select" id="editTipoCuenta" name="tipo_cuenta" required>
+                                    <% tipos_cuenta.forEach(tipo=> { %>
+                                        <option value="<%= tipo %>">
+                                            <%= tipo %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editEstadoCuenta" class="form-label">Estado:</label>
+                                <select class="form-select" id="editEstadoCuenta" name="estado_cuenta" required>
+                                    <% estados_cuenta.forEach(estado=> { %>
+                                        <option value="<%= estado %>">
+                                            <%= estado %>
+                                        </option>
+                                        <% }); %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Preparar edición
+            function prepararEdicion(id, correo, tipoCuenta, estadoCuenta) {
+                document.getElementById('editId').value = id;
+                document.getElementById('editCorreo').value = correo;
+                document.getElementById('editTipoCuenta').value = tipoCuenta;
+                document.getElementById('editEstadoCuenta').value = estadoCuenta;
+                document.getElementById('formEditar').action = `/cuenta/${id}?_method=PUT`;
+            }
+
+            // Preparar eliminación
+            function prepararEliminacion(id) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "Esta acción no se puede revertir",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('deleteId').value = id;
+                        document.getElementById('formEliminar').action = `/cuenta/${id}?_method=DELETE`;
+                        document.getElementById('formEliminar').submit();
+                    }
+                });
+            }
+        </script>
+</body>
+
+</html>
