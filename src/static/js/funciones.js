@@ -17,13 +17,15 @@ function cambiar_tema() {
     // Cambiar icono
     tema_icono.className = nuevo_tema === 'light' ? 'fas fa-moon' : 'fas fa-sun';
 
-    // Cambiar logo
-    const logo = document.querySelector('header img');
+    // Cambiar logos de la página
+    const logos = document.querySelectorAll('header img, .navbar-brand img');
 
     // Cambiar logo dependiendo del tema
-    if (logo) {
-        logo.src = nuevo_tema === 'light' ? 'img/vn_oscuro.png' : 'img/vn_claro.png';
-    }
+    logos.forEach(logo => {
+        if (logo) {
+            logo.src = nuevo_tema === 'light' ? '/img/vn_oscuro.png' : '/img/vn_claro.png';
+        }
+    });
 
     // Guardar tema en localStorage
     localStorage.setItem('theme', nuevo_tema);
@@ -109,13 +111,15 @@ function inicializar_tema() {
         tema_icono.className = savedTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
     }
 
-    // Cambiar logo
-    const logo = document.querySelector('header img');
+    // Cambiar logos de la página
+    const logos = document.querySelectorAll('header img, .navbar-brand img');
 
     // Cambiar logo dependiendo del tema
-    if (logo) {
-        logo.src = savedTheme === 'light' ? 'img/vn_oscuro.png' : 'img/vn_claro.png';
-    }
+    logos.forEach(logo => {
+        if (logo) {
+            logo.src = savedTheme === 'light' ? '/img/vn_oscuro.png' : '/img/vn_claro.png';
+        }
+    });
 }
 
 // Inicialización cuando el DOM está listo

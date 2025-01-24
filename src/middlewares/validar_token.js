@@ -19,6 +19,9 @@ export const autorizacion_requerida = (req, res, next) => {
             return res.redirect('/inicio_sesion');
         }
 
+        // añadir la información decodificada a req.usuario
+        req.usuario = decoded;
+
         // continuar con la ejecucion
         next();
     });

@@ -239,16 +239,22 @@ export const cerrar_sesion = async (req, res) => {
 // metodo para obtener el perfil de un usuario
 export const perfil = async (req, res) => {
     try {
+
+        // Obtener el id del usuario
+        const usuarioId = req.usuario.id;
+
         // Obtener el usuario desde la cookie
-        const usuario = req.usuario;
+        // const usuario = req.usuario;
 
         // Buscar la cuenta
-        const cuenta = await Cuenta.findOne({ correo: usuario.correo });
+        const cuenta = await Cuenta.findById(usuarioId);
+
+        if (!cuenta) {
+            return res.redirect('/inicio_sesion');
+        }
 
         // Responder con éxito
-        return res.json({
-            error: false,
-            mensaje: 'Perfil obtenido exitosamente',
+        return res.render('usuario/perfil', {
             usuario: {
                 correo: cuenta.correo,
                 tipo: cuenta.tipo_cuenta
@@ -259,10 +265,7 @@ export const perfil = async (req, res) => {
         // mensaje de error en consola
         console.log('Error al obtener el perfil', error);
         // mensaje de error para el frontend
-        return res.status(500).json({
-            error: true,
-            mensaje: 'Error al obtener el perfil'
-        });
+        return res.redirect('/inicio_sesion');
     }
 };
 

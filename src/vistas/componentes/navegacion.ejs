@@ -1,31 +1,35 @@
-<!-- navegacion general de las paginas -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">NodeJS</a>
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="/img/vn_claro.png" alt="Logo" height="30" class="me-2">
+            NodeJS
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav  ms-auto">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                    <a class="nav-link" href="/">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/acerca">Acerca de</a>
+                    <a class="nav-link" href="/acerca">Acerca de</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/contacto">Contacto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/registro">Registro</a>
-                </li>
-                <li class="nav-item ms-2">
-                    <button class="theme-toggle" onclick="cambiar_tema()">
-                        <i id="theme-icon" class="fas fa-sun"></i>
-                    </button>
+                    <a class="nav-link" href="/contacto">Contacto</a>
                 </li>
             </ul>
+            <div class="d-flex align-items-center gap-3">
+                <button class="theme-toggle" onclick="cambiar_tema()" title="Cambiar tema">
+                    <i id="theme-icon" class="fas fa-sun"></i>
+                </button>
+                <% if (locals.usuario) { %>
+                    <%- include('menu_usuario') %>
+                        <% } else { %>
+                            <a href="/registro" class="btn btn-outline-primary">Registro</a>
+                            <% } %>
+            </div>
         </div>
     </div>
 </nav>

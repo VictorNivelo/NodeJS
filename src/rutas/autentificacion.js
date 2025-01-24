@@ -15,7 +15,9 @@ rutas.post('/inicio_sesion', inicio_sesion);
 
 rutas.post('/cerrar_sesion', cerrar_sesion);
 
-rutas.post('/perfil', autorizacion_requerida, perfil);
+rutas.get('/perfil', autorizacion_requerida, perfil);
+
+// rutas.post('/perfil', autorizacion_requerida, perfil);
 
 // exportar las rutas
 export default rutas
