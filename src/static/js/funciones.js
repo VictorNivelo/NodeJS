@@ -88,11 +88,10 @@ function actualizar_menu_usuario() {
             ${usuario.correo}
         `;
     } else {
-        console.log('No se pudo actualizar el menú:', {
-            menuExists: !!boton_menu,
-            userExists: !!usuario,
-            emailExists: usuario?.correo
-        });
+        boton_menu.innerHTML = `
+            <i class="bi bi-person-circle me-1"></i>
+            Usuario
+        `;
     }
 }
 

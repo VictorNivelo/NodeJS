@@ -112,19 +112,10 @@ small {
     transition: var(--transition);
 }
 
-.theme-toggle:hover {
-    transform: scale(1.1);
-    background: var(--hover);
-}
-
 .theme-toggle i {
     color: var(--texto-primario);
     font-size: 1.2rem;
     transition: var(--transition);
-}
-
-.theme-toggle:hover i {
-    transform: rotate(360deg);
 }
 
 .dropdown-menu {
@@ -154,24 +145,6 @@ small {
 .dropdown-divider {
     border-color: var(--borde);
     margin: 0.5rem 0;
-}
-
-#menuUsuario {
-    background-color: transparent;
-    border: 1px solid var(--borde);
-    color: var(--texto-primario);
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-#menuUsuario:hover {
-    background-color: var(--hover);
-}
-
-#menuUsuario i {
-    font-size: 1.1rem;
 }
 
 .dropdown-toggle::after {
@@ -219,19 +192,11 @@ small {
     transition: background-color 0.2s ease;
 }
 
-.table tbody tr:nth-child(even) {
-    background-color: var(--table-stripe) !important;
-}
-
 .table tbody td {
     padding: 1rem;
     color: var(--table-text) !important;
     border-bottom: 1px solid var(--borde);
     background-color: transparent !important;
-}
-
-.table tbody tr:hover {
-    background-color: var(--hover) !important;
 }
 
 .modal-content {

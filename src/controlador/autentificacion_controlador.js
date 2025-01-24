@@ -215,7 +215,16 @@ export const cerrar_sesion = async (req, res) => {
         // Limpiar la cookie del token
         res.clearCookie('token');
 
+        // Limpiar la cookie del usuario
+        res.clearCookie('usuario');
+
+        // establecer la cookie con un tiempo de expiracion
         res.cookie("token", "", {
+            expires: new Date(0)
+        });
+
+        // establecer la cookie del usuario con un tiempo de expiracion
+        res.cookie("usuario", "", {
             expires: new Date(0)
         });
 
