@@ -1,4 +1,4 @@
-import { registro, inicio_sesion, cerrar_sesion, perfil } from '../controlador/autentificacion_controlador.js'
+import { registro, inicio_sesion, cerrar_sesion, perfil } from '../controlador/controlador_autentificacion.js'
 import { autorizacion_requerida } from '../middlewares/validar_token.js'
 import { Router } from 'express'
 

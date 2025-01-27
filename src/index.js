@@ -7,25 +7,25 @@ import app from './app.js';
 // puerto de escucha
 const puerto = 3000;
 
-// direccion base
+// dirección base
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-// imprime la direccion base en consola
+// imprime la dirección base en consola
 // console.log(__dirname)
 
-// direccion de la carpeta static
+// dirección de la carpeta static
 app.use(express.static(join(__dirname, "static")))
 
-// direccion de la carpeta vistas
+// dirección de la carpeta vistas
 app.set("views", join(__dirname, "vistas"))
 app.set("view engine", "ejs")
 
 // app.use(indiceRutas)
 // app.use('/api', autenticaciónRutas);
 
-// coneccion a la base de datos
+// conexión a la base de datos
 conectarBD();
 
-// iniciacion del puerto de escucha
+// iniciación del puerto de escucha
 app.listen(puerto);
 console.log("Servidor en puerto", puerto);

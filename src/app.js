@@ -1,4 +1,4 @@
-import autentificacionRutas from './rutas/autentificacion.js';
+import autentificacionRutas from './rutas/rutas_autentificacion.js';
 import rutasCrud from './rutas/rutas_crud.js';
 import methodOverride from 'method-override';
 import rutasBase from './rutas/rutas.js';

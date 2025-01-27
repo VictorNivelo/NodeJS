@@ -22,7 +22,7 @@ export const autorizacion_requerida = (req, res, next) => {
         // añadir la información decodificada a req.usuario
         req.usuario = decoded;
 
-        // continuar con la ejecucion
+        // continuar con la ejecución
         next();
     });
 }

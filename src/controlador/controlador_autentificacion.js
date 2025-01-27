@@ -4,7 +4,7 @@ import Persona from '../modelo/persona.js';
 import Cuenta from '../modelo/cuenta.js';
 import bcrypt from 'bcryptjs';
 
-// metodo para el registro de una cuenta
+// método para el registro de una cuenta
 export const registro = async (req, res) => {
 
     // si es get se renderiza la vista de registro
@@ -20,12 +20,12 @@ export const registro = async (req, res) => {
 
     console.log(tipo_cuenta);
 
-    // construccion de una nueva cuenta
+    // construcción de una nueva cuenta
     const { correo, contrasenia, tipo_cuenta: tipoCuenta, estado_cuenta } = req.body;
 
     try {
 
-        // // validacion de los campos
+        // // validación de los campos
         // if (!correo || !contrasenia || !tipoCuenta) {
         //     return res.status(400).json({
         //         // mensaje de respuesta para el frontend
@@ -33,7 +33,7 @@ export const registro = async (req, res) => {
         //     });
         // }
 
-        // validacion de la existencia de una cuenta
+        // validación de la existencia de una cuenta
         const cuentaExistente = await Cuenta.findOne({ correo });
 
         if (cuentaExistente) {
@@ -45,10 +45,10 @@ export const registro = async (req, res) => {
             });
         }
 
-        // encriptacion de la contraseña
+        // encriptación de la contraseña
         const encriptarContrasenia = await bcrypt.hash(contrasenia, 10);
 
-        // creacion de una cuenta
+        // creación de una cuenta
         const cuenta = new Cuenta({
             correo,
             contrasenia: encriptarContrasenia,
@@ -62,7 +62,7 @@ export const registro = async (req, res) => {
         // guardado en la base de datos
         const cuentaGuardada = await cuenta.save();
 
-        // validacion de la existencia de una persona
+        // validación de la existencia de una persona
         // const personaExistente = await Persona.findOne({ numero_dni });
 
         // if (personaExistente) {
@@ -73,7 +73,7 @@ export const registro = async (req, res) => {
         //     });
         // }
 
-        // // creacion de una persona
+        // // creación de una persona
         // const persona = new Persona({
         //     tipo_dni,
         //     numero_dni,
@@ -82,8 +82,8 @@ export const registro = async (req, res) => {
         //     correo_personal,
         //     genero,
         //     fecha_nacimiento,
-        //     telefono,
-        //     direccion,
+        //     teléfono,
+        //     dirección,
         //     cuenta: cuenta._id
         // });
 
@@ -107,7 +107,7 @@ export const registro = async (req, res) => {
         //     cuenta: cuentaGuardada
         // });
 
-        // creacion de un token
+        // creación de un token
         const token = await crearToken({ id: cuentaGuardada._id, correo: cuentaGuardada.correo });
 
         // respuesta mediante cookie
@@ -136,7 +136,7 @@ export const registro = async (req, res) => {
     }
 };
 
-// metodo para el inicio de sesion
+// método para el inicio de sesion
 export const inicio_sesion = async (req, res) => {
     // Si es GET renderiza la vista
     if (req.method === 'GET') {
@@ -209,7 +209,7 @@ export const inicio_sesion = async (req, res) => {
     }
 };
 
-// metodo para cerrar sesion
+// método para cerrar sesion
 export const cerrar_sesion = async (req, res) => {
     try {
         // Limpiar la cookie del token
@@ -218,12 +218,12 @@ export const cerrar_sesion = async (req, res) => {
         // Limpiar la cookie del usuario
         res.clearCookie('usuario');
 
-        // establecer la cookie con un tiempo de expiracion
+        // establecer la cookie con un tiempo de expiración
         res.cookie("token", "", {
             expires: new Date(0)
         });
 
-        // establecer la cookie del usuario con un tiempo de expiracion
+        // establecer la cookie del usuario con un tiempo de expiración
         res.cookie("usuario", "", {
             expires: new Date(0)
         });
@@ -245,7 +245,7 @@ export const cerrar_sesion = async (req, res) => {
     }
 };
 
-// metodo para obtener el perfil de un usuario
+// método para obtener el perfil de un usuario
 export const perfil = async (req, res) => {
     try {
 
@@ -278,12 +278,12 @@ export const perfil = async (req, res) => {
     }
 };
 
-// envio de html
+// envió de html
 // export const registro = (req, res) => { res.render('usuario/registro') };
 
 // export const inicio_sesion = (req, res) => { res.render('usuario/inicio_sesion') };
 
-// envio de mensaje
+// envió de mensaje
 
 // export const registro = (req, res) => { res.send('Registro') };
 

@@ -3,7 +3,7 @@ import tipo_cuenta from '../modelo/enum/tipo_cuenta.js';
 import Cuenta from '../modelo/cuenta.js';
 import bcrypt from 'bcryptjs';
 
-// metodo para mostrar las cuentas
+// método para mostrar las cuentas
 export const listarCuenta = async (req, res) => {
     try {
         // Obtener todas las cuentas
@@ -25,13 +25,13 @@ export const listarCuenta = async (req, res) => {
     }
 };
 
-// metodo para crear una cuenta
+// método para crear una cuenta
 export const crearCuenta = async (req, res) => {
     try {
         // obtener los datos de la cuenta
         const { correo, contrasenia, tipo_cuenta, estado_cuenta } = req.body;
 
-        // validacion de la existencia de una cuenta
+        // validación de la existencia de una cuenta
         const cuentaExistente = await Cuenta.findOne({ correo });
 
         // si existe una cuenta con el correo
@@ -41,10 +41,10 @@ export const crearCuenta = async (req, res) => {
             });
         }
 
-        // encriptacion de la contraseña
+        // encriptación de la contraseña
         const encriptarContrasenia = await bcrypt.hash(contrasenia, 10);
 
-        // creacion de una nueva cuenta
+        // creación de una nueva cuenta
         const nuevaCuenta = new Cuenta({
             correo,
             contrasenia: encriptarContrasenia,
@@ -68,7 +68,7 @@ export const crearCuenta = async (req, res) => {
     }
 };
 
-// metodo para actualizar una cuenta
+// método para actualizar una cuenta
 export const actualizarCuenta = async (req, res) => {
     try {
         // obtener el id de la cuenta
@@ -77,7 +77,7 @@ export const actualizarCuenta = async (req, res) => {
         // obtener los datos de la cuenta
         const { correo, tipo_cuenta, estado_cuenta } = req.body;
 
-        // validacion de la existencia de una cuenta
+        // validación de la existencia de una cuenta
         const cuentaExistente = await Cuenta.findOne({
             correo,
             _id: { $ne: id }
@@ -112,7 +112,7 @@ export const actualizarCuenta = async (req, res) => {
     }
 };
 
-// metodo para eliminar una cuenta
+// método para eliminar una cuenta
 export const eliminarCuenta = async (req, res) => {
     try {
         // obtener el id de la cuenta
